@@ -18,11 +18,11 @@ public class FileGenerator extends AbstractFileProcessing {
         long fileSize = 0, lines = 0;
         final long start = System.currentTimeMillis();
 
-        try(final var writter = Files.newBufferedWriter(Paths.get(AbstractFileProcessing.FILE_NAME))) {
+        try(final var writter = Files.newBufferedWriter(Paths.get(FILE_NAME))) {
             while(fileSize < MAX_FILE_SIZE){
-                writter.write(AbstractFileProcessing.DEFAULT_FILE_LINE);
+                writter.write(DEFAULT_FILE_LINE);
                 lines++;
-                fileSize += AbstractFileProcessing.DEFAULT_FILE_LINE.length();
+                fileSize += DEFAULT_FILE_LINE.length();
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
