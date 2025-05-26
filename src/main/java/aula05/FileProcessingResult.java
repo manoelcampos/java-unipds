@@ -2,9 +2,9 @@ package aula05;
 
 /**
  * Armazena dados sobre a leitura ou gravação de um arquivo.
- * @author Manoel Campos
  * @param linesNumber total de linhas processadas ou -1 para indicar que não foi possível identificar o total de linhas
  * @param processingTimeSecs tempo de processamento de todo o arquivo (sem segundos)
+ * @author Manoel Campos
  */
 public record FileProcessingResult(long linesNumber, double processingTimeSecs) {
     @Override

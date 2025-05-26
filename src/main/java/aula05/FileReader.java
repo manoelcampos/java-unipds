@@ -1,9 +1,11 @@
 package aula05;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
@@ -24,10 +26,16 @@ public class FileReader extends AbstractFileProcessing {
         System.out.println("Tempo de leitura com NIO2                                               : " + readFileNIO2());
     }
 
+    /**
+     * Le um arquivo usando um objeto {@link BufferedReader}.
+     * @return um objeto {@link FileProcessingResult} com o total de linhas lidas e o tempo de execução.
+     * @throws IOException
+     */
     private static FileProcessingResult readFileClassic() throws IOException {
         final long start = System.currentTimeMillis();
         int lines = 0;
         // Usa um try(), chamado de try-with-resources, para garantir que o reader seja fechado automaticamente ao final do bloco
+        // Usa o Files.newBufferedReader() que simplifica a criação de um objeto BufferedReader
         try (final var reader = Files.newBufferedReader(Paths.get(FILE_NAME))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -42,7 +50,9 @@ public class FileReader extends AbstractFileProcessing {
     }
 
     /**
+     * Le um arquivo usando a API NIO (New I/O) com um objeto {@link FileChannel}.
      * @param bufferSize tamanho do buffer para armazenar os dados lidos. Quanto maior o buffer, mais eficiente será a leitura.
+     * @return um objeto {@link FileProcessingResult} com o total de linhas lidas e o tempo de execução.
      * @throws IOException
      */
     private static FileProcessingResult readFileNIO(final int bufferSize) throws IOException {
@@ -81,6 +91,11 @@ public class FileReader extends AbstractFileProcessing {
         return new FileProcessingResult(lines, executionTime);
     }
 
+    /**
+     * Le um arquivo usando a API NIO2 com o método {@link Files#readAllLines(Path)}.
+     * @return um objeto {@link FileProcessingResult} com o total de linhas lidas e o tempo de execução.
+     * @throws IOException
+     */
     private static FileProcessingResult readFileNIO2() throws IOException {
         final long start = System.currentTimeMillis();
         final var lines = Files.readAllLines(Paths.get(FILE_NAME));
@@ -90,5 +105,4 @@ public class FileReader extends AbstractFileProcessing {
         final double executionTime = executionTime(start);
         return new FileProcessingResult(lines.size(), executionTime);
     }
-
 }
