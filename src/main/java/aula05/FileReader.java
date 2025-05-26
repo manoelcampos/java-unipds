@@ -56,13 +56,12 @@ public class FileReader extends AbstractFileProcessing {
      */
     private static FileProcessingResult readFileNIO(final int bufferSize) throws IOException {
         final long start = System.currentTimeMillis();
-        int lines = -1;
         // Usa um try(), chamado de try-with-resources, para garantir que o channel seja fechado automaticamente ao final do bloco
         try (final var channel = FileChannel.open(Paths.get(FILE_NAME), StandardOpenOption.READ)) {
             final var buffer = ByteBuffer.allocate(bufferSize);
             while (channel.read(buffer) != -1) {
-                /* Só temos como saber o total de linhas lidas se lermos o total de chars de cada linha por vez
-                * (exceto se pegarmos o buffer e procurarmos um \n dentro dele, mas isso vai aumentar o tempo de processamento).
+                /* Só temos como saber o total de linhas lidas se
+                * pegarmos o buffer e procurarmos um \n dentro dele, mas isso vai aumentar o tempo de processamento.
                 * Considerando que todas as linhas têm o mesmo tamanho,
                 * poderíamos calcular o total de linhas usando bufferSize/DEFAULT_FILE_LINE.
                 * Se temos um buffer de 150 bytes e o tamanho da linha é 100,
@@ -74,8 +73,6 @@ public class FileReader extends AbstractFileProcessing {
                 * Poderíamos pegar o buffer e converter para uma String, usando
                 * o length() para saber quantos caracteres tem.
                 * Mas isso também vai aumentar o tempo de execução. */
-                if(bufferSize == DEFAULT_FILE_LINE.length() + 1)
-                    lines++;
 
                 // ----------------------------- Simula processamento da linha -----------------------------------------
                 /*
@@ -89,15 +86,8 @@ public class FileReader extends AbstractFileProcessing {
             }
         }
 
-        /* Se lines for diferente de -1, indica que sabemos o total de linhas linhas.
-        * No entanto, como iniciamos a variável com -1 no lugar de zero, é preciso somar 1 aqui.
-        * O valor foi iniciado com -1 para indicar quando não conseguimos saber quando
-        * o total de linhas do arquivo não pode ser descoberto. */
-        if(lines > -1)
-            lines++;
-
         final double executionTime = executionTime(start);
-        return new FileProcessingResult(lines, executionTime);
+        return new FileProcessingResult(executionTime);
     }
 
     /**
