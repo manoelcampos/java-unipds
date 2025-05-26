@@ -18,8 +18,7 @@ public class FileReader extends AbstractFileProcessing {
 
         // Tamanho do buffer para leitura com NIO
         final int largeBufferSize = 8192;
-        // +1 para ler até o \n do final da linha (pois sabemos o tamanho de cada linha)
-        final int lineLenBufferSize = DEFAULT_FILE_LINE.length() + 1;
+        final int lineLenBufferSize = DEFAULT_FILE_LINE.length();
 
         System.out.println("Tempo de leitura com NIO/FileChannel e buffer grande                    : " + readFileNIO(largeBufferSize));
         System.out.println("Tempo de leitura com NIO/FileChannel e buffer menor (igual a line.len()): " + readFileNIO(lineLenBufferSize));
