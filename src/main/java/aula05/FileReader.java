@@ -62,8 +62,18 @@ public class FileReader extends AbstractFileProcessing {
             final var buffer = ByteBuffer.allocate(bufferSize);
             while (channel.read(buffer) != -1) {
                 /* Só temos como saber o total de linhas lidas se lermos o total de chars de cada linha por vez
-                * (a não ser que peguemos o buffer e procuremos um \n dentro dele, mas isso vai aumentar o tempo
-                * de processamento).*/
+                * (exceto se pegarmos o buffer e procurarmos um \n dentro dele, mas isso vai aumentar o tempo de processamento).
+                * Considerando que todas as linhas têm o mesmo tamanho,
+                * poderíamos calcular o total de linhas usando bufferSize/DEFAULT_FILE_LINE.
+                * Se temos um buffer de 150 bytes e o tamanho da linha é 100,
+                * a cada leitura do arquivo, estamos lendo 1.5 linha.
+                * Somando estes valores, temos o total de linhas.
+                * Mas isso atualmente não funciona, pois um caractere em uma String em Java
+                * pode ocupar 1 ou 2 bytes, depois da implementação de Compact Strings no JDK 9.
+                * Ver https://openjdk.org/jeps/254.
+                * Poderíamos pegar o buffer e converter para uma String, usando
+                * o length() para saber quantos caracteres tem.
+                * Mas isso também vai aumentar o tempo de execução. */
                 if(bufferSize == DEFAULT_FILE_LINE.length() + 1)
                     lines++;
 
