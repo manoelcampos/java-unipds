@@ -25,7 +25,7 @@ public class Encrypter {
         System.out.println("\t" + decrypt(encrypted, secretKey));
     }
 
-    public static String crypt(String text, Key key) throws Exception {
+    public static String crypt(final String text, final Key key) throws Exception {
         final var cipher = Cipher.getInstance(ALGORITHM);
         cipher.init(Cipher.ENCRYPT_MODE, key);
         final byte[] bytes = cipher.doFinal(text.getBytes());
@@ -33,7 +33,7 @@ public class Encrypter {
         return encoder.encodeToString(bytes);
     }
 
-    public static String decrypt(String text, Key chave) throws Exception {
+    public static String decrypt(final String text, final Key chave) throws Exception {
         final var cipher = Cipher.getInstance(ALGORITHM);
         cipher.init(Cipher.DECRYPT_MODE, chave);
 
