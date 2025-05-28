@@ -76,13 +76,13 @@ public class FileReader extends AbstractFileProcessing {
 
                 // ----------------------------- Simula processamento da linha -----------------------------------------
                 /*
-                // Só precisa do buffer.flip() aqui, para mudar o buffer do modo de escrita para o de leitura
+                // Só precisa do buffer.flip() se for mudar o buffer do modo de escrita para o de leitura
                 buffer.flip();
                 final var line = new String(buffer.array(), 0, buffer.limit());
                 System.out.println(line);
+                buffer.clear();
                 */
 
-                buffer.clear();
             }
         }
 
