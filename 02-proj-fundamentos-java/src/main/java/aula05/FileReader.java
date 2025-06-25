@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.stream.Stream;
 
 /**
  * @author Manoel Campos
@@ -98,6 +99,10 @@ public class FileReader extends AbstractFileProcessing {
     private static FileProcessingResult readFileNIO2() throws IOException {
         final long start = System.currentTimeMillis();
         final var lines = Files.readAllLines(Paths.get(FILE_NAME));
+
+        try(var linesStream = Files.lines(Paths.get(FILE_NAME))){
+            linesStream.forEach(System.out::println);
+        }
 
         // Simula processamento da linha
         // System.out.println(lines); // Descomente para ver o conteúdo do arquivo
