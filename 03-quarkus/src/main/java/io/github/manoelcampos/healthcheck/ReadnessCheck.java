@@ -1,4 +1,4 @@
-package io.github.manoelcampos;
+package io.github.manoelcampos.healthcheck;
 
 import io.github.manoelcampos.rest.starship.StarWarsService;
 import org.eclipse.microprofile.health.HealthCheck;

@@ -1,4 +1,4 @@
-package io.github.manoelcampos;
+package io.github.manoelcampos.healthcheck;
 
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
