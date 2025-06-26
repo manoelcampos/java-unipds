@@ -6,6 +6,8 @@ import jakarta.ws.rs.*;
 import java.util.List;
 
 /**
+ * Fornece operações CRUD via API REST para gerenciar o cadastro de pessoas.
+ * Cada método na classe é um endpoint que pode ser acessado via requisições HTTP.
  * @author Manoel Campos
  */
 @Path("/person")

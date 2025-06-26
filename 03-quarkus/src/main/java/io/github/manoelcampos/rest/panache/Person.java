@@ -11,6 +11,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
+ * Classe que representa uma Entidade JPA/Hibernate e que usa a extensão
+ * Panache do Quarkus que automaticamente implementa métodos para operações CRUD
+ * diretamente na classe da entidade.
+ *
  * Usa {@link PanacheEntityBase} no lugar de {@link PanacheEntity}
  * para ter mais controle sobre as configurações do atributo ID.
  * @author Manoel Campos

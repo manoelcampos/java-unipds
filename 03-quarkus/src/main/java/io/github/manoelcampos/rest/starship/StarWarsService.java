@@ -11,7 +11,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/// Classe do REST Client para acessar a API REST do Star Wars.
+/// Interface do REST Client para acessar a API REST do Star Wars.
+/// Ela é implementada automaticamente pelo Quarkus.
+///
 /// Precisa das extensões [quarkus-rest-client](https://quarkus.io/guides/rest-client)
 /// e quarkus-rest-client-jsonb (para serialização JSON)
 /// @author Manoel Campos
