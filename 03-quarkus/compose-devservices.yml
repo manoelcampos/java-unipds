@@ -1,0 +1,19 @@
+services:
+  jaeger:
+    # Esta é a versão 1 do Jaeger que está depracated
+    #image: jaegertracing/all-in-one:latest
+    ## https://www.jaegertracing.io/docs/2.7/getting-started/
+    image: cr.jaegertracing.io/jaegertracing/jaeger:2.7.0
+    ports:
+      - '16686:16686'
+      - '4317:4317'
+    environment:
+      COLLECTOR_OTLP_ENABLED: true
+  db:
+    image: postgres:17
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
