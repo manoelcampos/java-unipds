@@ -1,5 +1,6 @@
 package io.github.manoelcampos.rest.panache;
 
+import io.micrometer.core.annotation.Counted;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Path("/person")
 public class PersonResource {
     @GET
+    @Counted("counted.person.all") // requer quarkus-micrometer
     public List<Person> all(){
         return Person.listAll();
     }
