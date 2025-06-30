@@ -3,6 +3,7 @@ package io.github.manoelcampos.rest.panache;
 import io.micrometer.core.annotation.Counted;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import org.jboss.resteasy.reactive.RestPath;
 
 import java.util.List;
 
@@ -21,13 +22,17 @@ public class PersonResource {
 
     @GET
     @Path("/{id}")
-    public Person findById(@PathParam("id") long id) {
+    // @RestPath pode ser usado no lugar de @PathParam para usar o nome do parâmetro como nome da variável na URL
+    // Assim, não precisa repetir o nome do parâmetro como exigido pelo @PathParam.
+    // Ver: https://quarkus.io/guides/rest
+    public Person findById(@RestPath long id) {
+        System.out.println("findById: " + id);
         return Person.findById(id);
     }
 
     @GET
     @Path("/findByBirthYear/{year}")
-    public List<Person> findByBirthYear(@PathParam("year") int year) {
+    public List<Person> findByBirthYear(@RestPath int year) {
         return Person.findByBirthYear(year);
     }
 
