@@ -1,6 +1,6 @@
 package io.github.manoelcampos.healthcheck;
 
-import io.github.manoelcampos.rest.starship.StarWarsService;
+import io.github.manoelcampos.rest.faulttolerance.starship.StarWarsService;
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.eclipse.microprofile.health.Readiness;

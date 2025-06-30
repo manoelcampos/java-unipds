@@ -1,4 +1,4 @@
-package io.github.manoelcampos.rest.starship;
+package io.github.manoelcampos.rest.faulttolerance.starship;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

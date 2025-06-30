@@ -1,4 +1,4 @@
-package io.github.manoelcampos.rest.starship;
+package io.github.manoelcampos.rest.faulttolerance.starship;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
