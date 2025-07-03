@@ -35,12 +35,6 @@ public class Person extends PanacheEntityBase {
     /**
      * Com os atributos públicos, o Panache troca os acessos diretos
      * a cada atributo pela chamada do respectivo getter ou setter (se houver).
-     * O problema é que isso só funciona se você escrever o acesso a algum
-     * atributo diretamente no seu código, como {@snippet : person.name = "Fulano"; },
-     * que será trocado em tempo de build por {@snippet : person.setName("Fulano"); }.
-     * Quando você recebe um objeto JSON que é deserializado para um objeto Java,
-     * isso não ocorre, abrindo uma brecha para bugs por conta de comportamentos
-     * distintos em diferentes situações.
      * @param name
      */
     public void setName(String name) {
