@@ -1,13 +1,14 @@
+# https://quarkus.io/guides/compose-dev-services
 services:
   jaeger:
-    # Esta é a versão 1 do Jaeger que está depracated
-    #image: jaegertracing/all-in-one:latest
-    ## https://www.jaegertracing.io/docs/2.7/getting-started/
+    ## https://www.jaegertracing.io/docs/2.7/getting-started
     image: cr.jaegertracing.io/jaegertracing/jaeger:2.7.0
+    # A imagem jaegertracing/all-in-one:latest é a versão 1 do Jaeger que está depracated
     ports:
       - '16686:16686'
       - '4317:4317'
     environment:
+      # OpenTelemetry Protocol (OTLP)
       COLLECTOR_OTLP_ENABLED: true
   db:
     image: postgres:17

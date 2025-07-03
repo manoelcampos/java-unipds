@@ -22,7 +22,7 @@ public class PersonResource {
 
     @GET
     @Path("/{id}")
-    // @RestPath pode ser usado no lugar de @PathParam para usar o nome do parâmetro como nome da variável na URL
+    // @RestPath pode ser colocado no lugar de @PathParam para usar o nome do parâmetro como nome da variável na URL
     // Assim, não precisa repetir o nome do parâmetro como exigido pelo @PathParam.
     // Ver: https://quarkus.io/guides/rest
     public Person findById(@RestPath long id) {

@@ -12,15 +12,13 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNullElse;
 
-/**
- * Classe que representa uma Entidade JPA/Hibernate e que usa a extensão
- * Panache do Quarkus que automaticamente implementa métodos para operações CRUD
- * diretamente na classe da entidade.
- *
- * Usa {@link PanacheEntityBase} no lugar de {@link PanacheEntity}
- * para ter mais controle sobre as configurações do atributo ID.
- * @author Manoel Campos
- */
+/// Classe que representa uma Entidade JPA/Hibernate e que usa a extensão
+/// Panache do Quarkus que automaticamente implementa métodos para operações CRUD
+/// diretamente na classe da entidade.
+///
+/// Usa [PanacheEntityBase] no lugar de [PanacheEntity]
+/// para ter mais controle sobre as configurações do atributo ID.
+/// @author Manoel Campos
 @Entity
 public class Person extends PanacheEntityBase {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
