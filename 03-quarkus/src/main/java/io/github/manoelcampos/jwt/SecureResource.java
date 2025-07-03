@@ -7,12 +7,10 @@ import jakarta.ws.rs.Path;
 import org.eclipse.microprofile.jwt.Claim;
 import org.eclipse.microprofile.jwt.Claims;
 
-/**
- * Uma classe de resource que contém métodos
- * que exigem autenticação via JWT para serem acessados.
- * Depende da extensão quarkus-smallrye-jwt.
- * @author Manoel Campos
- */
+/// Uma classe de resource que contém métodos
+/// que exigem autenticação via JWT para serem acessados.
+/// Depende da extensão [quarkus-smallrye-jwt](https://quarkus.io/guides/security-jwt).
+/// @author Manoel Campos
 @Path("/secure")
 @RequestScoped
 public class SecureResource {
