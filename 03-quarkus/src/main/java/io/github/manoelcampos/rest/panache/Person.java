@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import java.time.LocalDate;
 import java.util.List;
 
+import static java.util.Objects.requireNonNullElse;
+
 /**
  * Classe que representa uma Entidade JPA/Hibernate e que usa a extensão
  * Panache do Quarkus que automaticamente implementa métodos para operações CRUD
@@ -42,7 +44,7 @@ public class Person extends PanacheEntityBase {
      * @param name
      */
     public void setName(String name) {
-        name = name.trim();
+        name = requireNonNullElse(name, "").trim();
         System.out.println("Chamando setName: " + name);
         if(name.matches("\\d+")) {
             throw new IllegalArgumentException("O nome não pode conte números");
