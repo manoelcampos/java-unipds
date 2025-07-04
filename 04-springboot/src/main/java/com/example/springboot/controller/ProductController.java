@@ -2,13 +2,11 @@ package com.example.springboot.controller;
 
 import com.example.springboot.model.Product;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Manoel Campos
@@ -25,40 +23,45 @@ public class ProductController {
     );
 
     @GetMapping
-    public Set<Product> all() {
-        return products;
+    public ResponseEntity<Set<Product>> all() {
+        return ResponseEntity.ok(products);
     }
 
     @GetMapping("/{id}")
-    public Product findById(@PathVariable long id) {
-        return products.stream()
-                       .filter(p -> p.getId() == id)
-                       .findFirst()
-                       .orElseThrow(() -> newNotFoundException(id));
+    public ResponseEntity<Product> findById(@PathVariable long id) {
+        Optional<Product> optional = products.stream()
+                                             .filter(p -> p.getId() == id)
+                                             .findFirst();
+
+        return optional.map(ResponseEntity::ok)
+                       .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/sorted")
-    public List<Product> findById(@RequestParam(required = false) String order) {
+    public ResponseEntity<List<Product>> findById(@RequestParam(required = false) String order) {
         final String orderParam = order == null ? "" : order.toLowerCase();
-        if(orderParam.isBlank()) {
-            return products.stream().toList();
-        }
 
         final var comparator = Comparator.comparingDouble(Product::getPrice);
-        if(orderParam.equals("asc")) {
-            return products.stream().sorted(comparator).toList();
-        } else if(orderParam.equals("desc")) {
-            return products.stream().sorted(comparator.reversed()).toList();
-        }
+        final List<Product> list;
+        if(orderParam.isBlank())
+            list = products.stream().toList();
+        else if(orderParam.equals("asc"))
+            list = products.stream().sorted(comparator).toList();
+        else if(orderParam.equals("desc"))
+            list = products.stream().sorted(comparator.reversed()).toList();
+        else list = null;
 
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parâmetro 'order' inválido. Use 'asc' ou 'desc'.");
+        if(list == null)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parâmetro 'order' inválido. Use 'asc' ou 'desc'.");
+
+        return ResponseEntity.ok(list);
     }
 
     @PostMapping
-    public Product add(@RequestBody Product product) {
+    public ResponseEntity<Product> add(@RequestBody Product product) {
         System.out.println(product);
         products.add(product);
-        return product;
+        return ResponseEntity.ok(product);
     }
 
     /**
@@ -74,13 +77,13 @@ public class ProductController {
      * @return
      */
     @PutMapping
-    public Product update(@RequestBody Product product) {
+    public ResponseEntity<Product> update(@RequestBody Product product) {
         if(!products.contains(product)) {
             throw newNotFoundException(product.getId());
         }
 
         products.add(product);
-        return product;
+        return ResponseEntity.ok(product);
     }
 
     @DeleteMapping("/{id}")
