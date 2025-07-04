@@ -1,5 +1,7 @@
 package com.example.springboot.model;
 
+import java.util.Objects;
+
 /**
  * @author Manoel Campos
  */
@@ -28,7 +30,7 @@ public class Product {
     }
 
     public void setId(Long id) {
-        this.id = id == null || id <= 0 ? ++currentId : id;
+        this.id = id == null || id < 0 ? ++currentId : id;
     }
 
     public String getName() {
@@ -50,5 +52,18 @@ public class Product {
     @Override
     public String toString() {
         return "Product{id=%d, name='%s', price=%s}".formatted(id, name, price);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (!(o instanceof Product product))
+            return false;
+
+        return Objects.equals(id, product.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
