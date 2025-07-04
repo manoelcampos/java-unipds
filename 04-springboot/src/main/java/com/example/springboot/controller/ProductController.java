@@ -67,7 +67,7 @@ public class ProductController {
     /**
      * Não incluiu o id como parâmetro no path pois, como não temos um banco de dados de fato,
      * ele estava apenas complicando as coisas.
-     * Como os produtos foram definidos como um Set no lugar de List,
+     * Como os produtos foram definidos como um {@link Set} no lugar de {@link List},
      * e na classe {@link Product} foi implementado o equals e hashCode
      * usando o id como critério de comparação, os produtos passam a ser únicos baseados no id.
      * Assim, basta usar o método {@link Set#contains(Object)} para verificar se o produto já existe.
@@ -78,7 +78,8 @@ public class ProductController {
      */
     @PutMapping
     public ResponseEntity<Product> update(@RequestBody Product product) {
-        if(!products.contains(product)) {
+        // Compara os produtos pelo id, pois o equals e hashCode na classe Product foi implementado assim.
+        if(!products.remove(product)) {
             throw newNotFoundException(product.getId());
         }
 
