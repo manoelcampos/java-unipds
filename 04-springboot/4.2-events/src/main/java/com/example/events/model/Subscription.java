@@ -3,6 +3,7 @@ package com.example.events.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 
@@ -14,8 +15,8 @@ public class Subscription {
     @Id @NotNull
     private SubscriptionID id;
 
-    @NotNull
-    private LocalDateTime createdAt;
+    @NotNull @ColumnDefault("current_timestamp")
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @NotNull
     private int level;

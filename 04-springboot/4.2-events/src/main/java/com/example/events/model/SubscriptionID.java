@@ -9,17 +9,17 @@ import jakarta.persistence.ManyToOne;
 @Embeddable
 public class SubscriptionID {
     @ManyToOne
-    private UserAccount user;
+    private UserAccount userAccount;
 
     @ManyToOne
     private Session session;
 
-    public UserAccount getUser() {
-        return user;
+    public UserAccount getUserAccount() {
+        return userAccount;
     }
 
-    public void setUser(UserAccount user) {
-        this.user = user;
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 
     public Session getSession() {
@@ -29,4 +29,5 @@ public class SubscriptionID {
     public void setSession(Session session) {
         this.session = session;
     }
+
 }

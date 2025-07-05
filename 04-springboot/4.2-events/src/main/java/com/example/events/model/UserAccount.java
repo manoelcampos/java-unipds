@@ -1,5 +1,6 @@
 package com.example.events.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
@@ -25,7 +26,7 @@ public class UserAccount extends AbstractEntity {
     @NotNull @NotBlank @Email @Column(unique = true)
     private String email;
 
-    @ManyToMany(mappedBy = "users") @NotNull
+    @ManyToMany(mappedBy = "users") @NotNull @JsonIgnore
     private List<Session> sessions;
 
     public String getName() {

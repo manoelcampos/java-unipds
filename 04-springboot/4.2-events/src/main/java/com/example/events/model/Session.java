@@ -1,8 +1,7 @@
 package com.example.events.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -24,6 +23,10 @@ public class Session extends AbstractEntity {
     private Conference conference;
 
     @ManyToMany @NotNull
+    @JoinTable(name = "subscription",
+            joinColumns = @JoinColumn(name = "session_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_account_id"))
+    @JsonIgnore
     private List<UserAccount> users;
 
     public String getTitle() {
