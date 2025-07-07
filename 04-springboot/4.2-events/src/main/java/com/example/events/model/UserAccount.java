@@ -20,8 +20,11 @@ import java.util.List;
 /// @author Manoel Campos
 @Entity
 public class UserAccount extends AbstractEntity {
+    @NotNull @NotBlank @Column(unique = true)
+    private String username;
+
     @NotNull @NotBlank
-    private String name;
+    private String password;
 
     @NotNull @NotBlank @Email @Column(unique = true)
     private String email;
@@ -29,12 +32,12 @@ public class UserAccount extends AbstractEntity {
     @ManyToMany(mappedBy = "users") @NotNull @JsonIgnore
     private List<Session> sessions;
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -51,5 +54,13 @@ public class UserAccount extends AbstractEntity {
 
     public void setSessions(List<Session> sessions) {
         this.sessions = sessions;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

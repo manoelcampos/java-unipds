@@ -1,5 +1,5 @@
-insert into user_account (name, email) values ('UserAccount 1', 'user1@email.com');
-insert into user_account (name, email) values ('UserAccount 2', 'user2@email.com');
+insert into user_account (username, email, password) values ('user1', 'user1@email.com', '123');
+insert into user_account (username, email, password) values ('user2', 'user2@email.com', '123');
 
 insert into conference (name, address) values ('Conference 1', '123 Main St');
 insert into conference (name, address) values ('Conference 2', '456 Elm St');
