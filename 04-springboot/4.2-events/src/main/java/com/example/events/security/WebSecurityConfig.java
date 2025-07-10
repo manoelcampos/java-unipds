@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig {
     public static final String[] PUBLIC_URLS =
         {
-            "/", "/index.html", "/conference", "/conference/{id}", "/user",
+            "/", "/index.html", "/conference", "/conference/{id}",
             // Endpoints do Swagger
             "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**"
         };

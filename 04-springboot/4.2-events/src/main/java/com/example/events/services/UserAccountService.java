@@ -3,6 +3,7 @@ package com.example.events.services;
 import com.example.events.dto.MyToken;
 import com.example.events.model.UserAccount;
 import com.example.events.repositories.UserAccountRepository;
+import com.example.events.security.TokenUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,6 @@ public class UserAccountService {
         return repository
                 .findByUsername(userAccount.getUsername())
                 .filter(foundUser -> encoder.matches(userAccount.getPassword(), foundUser.getPassword()))
-                .map(foundUser -> new MyToken("security123"));
+                .map(TokenUtil::encode);
     }
 }

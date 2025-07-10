@@ -16,11 +16,9 @@ public class AuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         System.out.println("Request URI: " + request.getRequestURI());
-        if(request.getHeader("Authorization") != null) {
-            final var auth = TokenUtil.decore(request);
-            if(auth != null)
-                SecurityContextHolder.getContext().setAuthentication(auth);
-        }
+        final var auth = TokenUtil.decode(request);
+        if(auth != null)
+            SecurityContextHolder.getContext().setAuthentication(auth);
         filterChain.doFilter(request, response);
     }
 }
