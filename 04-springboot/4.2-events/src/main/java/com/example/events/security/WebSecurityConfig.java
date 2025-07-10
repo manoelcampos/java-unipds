@@ -15,14 +15,23 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+    public static final String[] PUBLIC_URLS =
+        {
+            "/", "/index.html", "/conference", "/conference/{id}", "/user",
+            // Endpoints do Swagger
+            "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**"
+        };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
+        return
+            http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
-                       auth
-                           .requestMatchers(HttpMethod.GET, "/", "/index.html", "/conference", "/conference/{id}").permitAll()
-                           .anyRequest().authenticated() // Exige auth a qualquer outra requisição
+                   auth
+                       .requestMatchers(HttpMethod.GET, PUBLIC_URLS).permitAll()
+                       .requestMatchers(HttpMethod.POST, "/user", "/user/login").permitAll()
+                       .anyRequest().authenticated() // Exige auth a qualquer outra requisição (este é o padrão, não precisaria desta linha)
                 )
                 .addFilterBefore(new AuthFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();

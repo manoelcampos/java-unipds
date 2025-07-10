@@ -1,6 +1,7 @@
 package com.example.events.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
@@ -9,6 +10,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /// Aqui a classe foi nomeada como `UserAccount` no lugar de `User`,
@@ -23,14 +25,14 @@ public class UserAccount extends AbstractEntity {
     @NotNull @NotBlank @Column(unique = true)
     private String username;
 
-    @NotNull @NotBlank
+    @NotNull @NotBlank @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @NotNull @NotBlank @Email @Column(unique = true)
     private String email;
 
     @ManyToMany(mappedBy = "users") @NotNull @JsonIgnore
-    private List<Session> sessions;
+    private List<Session> sessions = new ArrayList<>();
 
     public String getUsername() {
         return username;
@@ -60,7 +62,7 @@ public class UserAccount extends AbstractEntity {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 }
